@@ -2,6 +2,8 @@ import StatusCodes from "http-status-codes";
 
 const sendMessage = async (req: any, res: any): Promise<void> => {
   const { convo: convoID } = req.params;
+  console.log(req.user);
+
   res
     .status(StatusCodes.CREATED)
     .json({ msg: `messege sent at convo ${convoID}` });
