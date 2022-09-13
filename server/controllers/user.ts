@@ -3,6 +3,10 @@ const User = require("../models/User");
 const { BadRequestError, UnauthenticatedError } = require("../errors");
 
 const register = async (req: any, res: any): Promise<void> => {
+  const { password, password2 } = req.body;
+  if (password !== password2) {
+    throw new BadRequestError("Password's do not match!");
+  }
   const user = await User.create({ ...req.body });
   const token = user.createJWT();
   res.status(StatusCodes.CREATED).json({
